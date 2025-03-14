@@ -1,10 +1,12 @@
 import { useState } from "react";
+import Form from "./components/Form";
+import Layout from "./components/layout";
 
 function App() {
   return (
-    <div>
-      <p>Welcome to Luna Edge technical interview</p>
-    </div>
+    <Layout>
+      <Form/>
+    </Layout>
   );
 }
 

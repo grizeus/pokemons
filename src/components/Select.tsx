@@ -126,7 +126,7 @@ const Select = ({
           </div>
         </div>
         {isOpen && availableOptions.length > 0 && (
-          <div className="scrollbar scrollbar-thumb-slate-400 scrollbar-thumb-rounded-xl scrollbar-w-2 absolute top-full left-0 z-1 mt-1 h-40 w-full flex-col gap-1 overflow-y-auto rounded-lg border border-slate-400 bg-white px-3 py-2 shadow-[0_4px_36px_0_rgba(0,0,0,0.02)]">
+          <div className="scrollbar scrollbar-thumb-slate-400 scrollbar-thumb-rounded-lg scrollbar-w-2 absolute top-full left-0 z-1 mt-1 h-40 w-full flex-col gap-1 overflow-y-auto rounded-lg border border-slate-400 bg-white px-3 py-2 shadow-[0_4px_36px_0_rgba(0,0,0,0.02)]">
             {availableOptions.map((option, i) => (
               <div
                 key={i}

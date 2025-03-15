@@ -1,35 +1,10 @@
 import { useEffect, useState } from "react";
+
 import Button from "./Button";
 import { fetchPokemonsSprites } from "../api/operations";
+import { ModalProps, Pokemon, SpritesMap } from "./types";
 
-interface TeamData {
-  firstName: string;
-  lastName: string;
-  pokemons: string[];
-}
-
-interface Pokemon {
-  name: string;
-  url: string;
-  sprites: {
-    front_default: string | null;
-    front_female: string | null;
-  };
-}
-
-interface SpritesMap {
-  [pokemonName: string]: string | null;
-}
-
-const Modal = ({
-  onClose,
-  isOpen,
-  data,
-}: {
-  onClose: () => void;
-  isOpen: boolean;
-  data: TeamData | null;
-}) => {
+const Modal = ({ onClose, isOpen, data }: ModalProps) => {
   const [sprites, setSprites] = useState<SpritesMap | null>(null);
   useEffect(() => {
     const handleEscapeKey = (e: KeyboardEvent) => {

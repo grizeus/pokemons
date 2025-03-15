@@ -1,15 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { FieldValues, RegisterOptions, UseFormRegister } from "react-hook-form";
-
-interface SelectFieldProps {
-  name: string;
-  register: UseFormRegister<FieldValues>;
-  options: string[];
-  label?: string;
-  placeholder?: string;
-  validation?: RegisterOptions;
-  errors?: string | null;
-}
+import { SelectFieldProps } from "./types";
 
 const Select = ({
   name,

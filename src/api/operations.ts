@@ -17,8 +17,8 @@ export const fetchPokemons = async () => {
 export const fetchPokemonsSprites = async (pokemons: string[]) => {
   try {
     const res = Promise.all(
-      pokemons.map(async el => {
-        const { data } = await pokeInstance.get(`/pokemon/${el}`);
+      pokemons.map(async name => {
+        const { data } = await pokeInstance.get(`/pokemon/${name}`);
         return data;
       })
     );

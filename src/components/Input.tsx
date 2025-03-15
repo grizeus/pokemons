@@ -1,20 +1,4 @@
-import {
-  FieldError,
-  FieldErrorsImpl,
-  FieldValues,
-  Merge,
-  RegisterOptions,
-  UseFormRegister,
-} from "react-hook-form";
-
-interface InputFieldProps {
-  name: string;
-  register: UseFormRegister<FieldValues>;
-  placeholder: string;
-  validation?: RegisterOptions;
-  className?: string;
-  errors?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
-}
+import { InputFieldProps } from "./types";
 
 const Input = ({
   name,

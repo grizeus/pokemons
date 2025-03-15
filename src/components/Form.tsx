@@ -1,13 +1,30 @@
 import { useForm } from "react-hook-form";
 import Input from "./Input";
 import Button from "./Button";
+import { useEffect, useState } from "react";
+import { fetchPokemons } from "../api/operations";
+import Select from "./Select";
+
+interface Pokemon {
+  name: string;
+  url: string;
+}
 
 const Form = () => {
+  const [pokemons, setpokemons] = useState([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    (async () => {
+      const { results } = await fetchPokemons();
+      const names = results.map((el: Pokemon) => el.name);
+      setpokemons(names);
+    })();
+  }, []);
 
   return (
     <form
@@ -27,7 +44,16 @@ const Form = () => {
         name="lastName"
         errors={errors.firstName ? "Last name is required" : null}
       />
-      <Button name="Submit"/>
+      <Select
+        options={pokemons}
+        name="pokemons"
+        register={register}
+        label="Pokemons"
+        validation={{ maxLength: 4, required: true }}
+        placeholder="Choose pokemon"
+        errors={errors.pokemons ? "Choose exactly 4 pokemons" : null}
+      />
+      <Button name="Submit" />
     </form>
   );
 };

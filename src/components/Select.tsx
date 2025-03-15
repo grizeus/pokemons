@@ -9,6 +9,7 @@ const Select = ({
   placeholder = "Choose options",
   validation = {},
   errors = null,
+  disabled = false,
 }: SelectFieldProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -32,9 +33,16 @@ const Select = ({
     };
   }, []);
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+  const toggleDropdown = () => {
+    if (!disabled) {
+      setIsOpen(!isOpen);
+    }
+  };
 
   const handleOptionClick = (option: string) => {
+    if (disabled) {
+      return;
+    }
     if (selectedOptions.length < maxLength) {
       setSelectedOptions(prev => {
         const newSelection = prev.includes(option)
@@ -54,6 +62,9 @@ const Select = ({
   };
 
   const removeBadge = (option: string) => {
+    if (disabled) {
+      return;
+    }
     setSelectedOptions(prev => {
       const newSelection = prev.filter(item => item !== option);
 
@@ -79,7 +90,11 @@ const Select = ({
       </div>
       <div ref={dropDownRef} className="relative cursor-pointer">
         <div
-          className="flex flex-wrap items-center gap-1 rounded-lg border border-slate-400 px-4 py-3 transition-colors duration-300 ease-in-out hover:border-indigo-600 focus:border-indigo-600 focus:outline-none"
+          className={`flex flex-wrap items-center gap-1 rounded-lg border border-slate-400 px-4 py-3 transition-colors duration-300 ease-in-out ${
+            disabled
+              ? "cursor-not-allowed border-slate-300 bg-slate-100"
+              : "cursor-pointer hover:border-indigo-600 focus:border-indigo-600"
+          } focus:outline-none`}
           onClick={toggleDropdown}>
           {selectedOptions.length > 0 ? (
             selectedOptions.map(option => (
@@ -135,6 +150,9 @@ const Select = ({
           {...register(name, {
             ...validation,
             validate: value => {
+              if (disabled) {
+                return true;
+              }
               let values: string[] = [];
 
               if (typeof value === "string") {
@@ -142,7 +160,6 @@ const Select = ({
               } else if (Array.isArray(value)) {
                 values = value;
               }
-              console.log(values);
               if (values.length === 0) {
                 return "This field is required";
               }

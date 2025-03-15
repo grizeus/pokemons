@@ -68,7 +68,7 @@ const Modal = ({ onClose, isOpen, data }: ModalProps) => {
             );
           })}
         </ul>
-        <Button clickHandler={onClose} name="To battle!" />
+        <Button clickHandler={onClose} label="To battle!" />
       </div>
     </div>
   );

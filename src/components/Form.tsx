@@ -11,11 +11,12 @@ import { Pokemon, TeamData } from "./types";
 const Form = () => {
   const [pokemons, setpokemons] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isDisabled, setDisabled] = useState(false);
   const [modalData, setData] = useState<TeamData | null>(null);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid, isSubmitted },
   } = useForm();
 
   useEffect(() => {
@@ -25,6 +26,10 @@ const Form = () => {
       setpokemons(names);
     })();
   }, []);
+
+  useEffect(() => {
+    setDisabled(isSubmitted && !isValid);
+  }, [isValid, isSubmitted]);
 
   return (
     <form
@@ -63,7 +68,7 @@ const Form = () => {
         placeholder="Choose pokemon"
         errors={errors.pokemons ? "Choose exactly 4 pokemons" : null}
       />
-      <Button name="Submit" />
+      <Button label="Submit" disabled={isDisabled} />
     </form>
   );
 };

@@ -1,25 +1,12 @@
 import { useForm } from "react-hook-form";
-import Input from "./Input";
-import Button from "./Button";
 import { useEffect, useState } from "react";
+
 import { fetchPokemons } from "../api/operations";
+import Button from "./Button";
 import Select from "./Select";
+import Input from "./Input";
 import Modal from "./Modal";
-
-interface Pokemon {
-  name: string;
-  url: string;
-  sprites: {
-    front_default: string | null;
-    front_female: string | null;
-  };
-}
-
-interface TeamData {
-  firstName: string;
-  lastName: string;
-  pokemons: string[];
-}
+import { Pokemon, TeamData } from "./types";
 
 const Form = () => {
   const [pokemons, setpokemons] = useState([]);

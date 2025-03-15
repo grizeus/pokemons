@@ -1,10 +1,10 @@
-interface BtnProps {
-  type?: "submit" | "button" | "reset" | undefined;
-  name?: string;
-  clickHandler?: () => void;
-}
+import { BtnProps } from "./types";
 
-const Button = ({ type = "submit", name = "Click", clickHandler }: BtnProps) => {
+const Button = ({
+  type = "submit",
+  name = "Click",
+  clickHandler,
+}: BtnProps) => {
   return (
     <button
       onClick={clickHandler}

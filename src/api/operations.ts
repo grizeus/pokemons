@@ -13,3 +13,21 @@ export const fetchPokemons = async () => {
     }
   }
 };
+
+export const fetchPokemonsSprites = async (pokemons: string[]) => {
+  try {
+    const res = Promise.all(
+      pokemons.map(async el => {
+        const { data } = await pokeInstance.get(`/pokemon/${el}`);
+        return data;
+      })
+    );
+    return res;
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      console.log(error.response?.data);
+    } else if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
+};

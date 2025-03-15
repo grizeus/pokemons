@@ -1,4 +1,11 @@
-import { FieldValues, RegisterOptions, UseFormRegister } from "react-hook-form";
+import {
+  FieldError,
+  FieldErrorsImpl,
+  FieldValues,
+  Merge,
+  RegisterOptions,
+  UseFormRegister,
+} from "react-hook-form";
 
 interface InputFieldProps {
   name: string;
@@ -6,7 +13,7 @@ interface InputFieldProps {
   placeholder: string;
   validation?: RegisterOptions;
   className?: string;
-  errors?: string | null;
+  errors?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
 }
 
 const Input = ({
@@ -15,7 +22,7 @@ const Input = ({
   placeholder,
   validation = {},
   className = "",
-  errors = null,
+  errors,
 }: InputFieldProps) => {
   return (
     <>
@@ -24,7 +31,13 @@ const Input = ({
         placeholder={placeholder}
         {...register(name, validation)}
       />
-      {errors && <span className="text-sm text-red-500">{errors}</span>}
+      {errors && (
+        <span className="text-sm text-red-500">
+          {errors.type === "required" && "This field is required"}
+          {errors.type === "minLength" && "Minimum length is 2 characters"}
+          {errors.type === "maxLength" && "Maximum length is 12 characters"}
+        </span>
+      )}
     </>
   );
 };

@@ -4,14 +4,27 @@ import Button from "./Button";
 import { useEffect, useState } from "react";
 import { fetchPokemons } from "../api/operations";
 import Select from "./Select";
+import Modal from "./Modal";
 
 interface Pokemon {
   name: string;
   url: string;
+  sprites: {
+    front_default: string | null;
+    front_female: string | null;
+  };
+}
+
+interface TeamData {
+  firstName: string;
+  lastName: string;
+  pokemons: string[];
 }
 
 const Form = () => {
   const [pokemons, setpokemons] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalData, setData] = useState<TeamData | null>(null);
   const {
     register,
     handleSubmit,
@@ -29,20 +42,30 @@ const Form = () => {
   return (
     <form
       className="flex w-100 flex-col gap-2"
-      onSubmit={handleSubmit(data => console.log(data))}>
+      onSubmit={handleSubmit(data => {
+        setModalOpen(true);
+        setData(data as TeamData);
+      })}>
+      {isModalOpen && (
+        <Modal
+          onClose={() => setModalOpen(false)}
+          isOpen={isModalOpen}
+          data={modalData}
+        />
+      )}
       <Input
         register={register}
         placeholder="Name"
         name="firstName"
-        validation={{ required: true }}
-        errors={errors.firstName ? "First name is required" : null}
+        validation={{ minLength: 2, maxLength: 12, required: true }}
+        errors={errors.firstName}
       />
       <Input
         register={register}
-        validation={{ required: true }}
+        validation={{ minLength: 2, maxLength: 12, required: true }}
         placeholder="Surname"
         name="lastName"
-        errors={errors.firstName ? "Last name is required" : null}
+        errors={errors.lastName}
       />
       <Select
         options={pokemons}

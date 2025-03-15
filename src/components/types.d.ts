@@ -39,9 +39,10 @@ type BtnType = "submit" | "button" | "reset" | undefined;
 
 export interface BtnProps {
   type?: BtnType;
-  name?: string;
+  label?: string;
   className?: string;
   clickHandler?: () => void;
+  disabled?: boolean;
 }
 
 export interface SelectFieldProps {
@@ -52,6 +53,7 @@ export interface SelectFieldProps {
   placeholder?: string;
   validation?: RegisterOptions;
   errors?: string | null;
+  disabled?: boolean;
 }
 
 export interface ModalProps {

@@ -1,0 +1,1 @@
+{"v":5,"entries":{"button--red":{"type":"story","id":"button--red","name":"Red","title":"Button","importPath":"./src/stories/Button.stories.js","componentPath":"./src/components/Button.tsx","tags":["dev","test"]}}}

@@ -40,6 +40,7 @@ type BtnType = "submit" | "button" | "reset" | undefined;
 export interface BtnProps {
   type?: BtnType;
   name?: string;
+  className?: string;
   clickHandler?: () => void;
 }
 

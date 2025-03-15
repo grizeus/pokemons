@@ -3,7 +3,7 @@ import pokeInstance from "./api";
 
 export const fetchPokemons = async () => {
   try {
-    const { data } = await pokeInstance.get("/pokemon?limit=20");
+    const { data } = await pokeInstance.get("/pokemon?limit=30");
     return data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {

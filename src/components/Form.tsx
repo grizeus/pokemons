@@ -5,6 +5,11 @@ import { useEffect, useState } from "react";
 import { fetchPokemons } from "../api/operations";
 import Select from "./Select";
 
+interface Pokemon {
+  name: string;
+  url: string;
+}
+
 const Form = () => {
   const [pokemons, setpokemons] = useState([]);
   const {
@@ -16,7 +21,7 @@ const Form = () => {
   useEffect(() => {
     (async () => {
       const { results } = await fetchPokemons();
-      const names = results.map(el => el.name);
+      const names = results.map((el: Pokemon) => el.name);
       setpokemons(names);
     })();
   }, []);
